@@ -46,7 +46,6 @@ function cipherCharacter(char,key){
         outputCode = resultingCode > 90 ? resultingCode - 26 : resultingCode;
     else if(charCode >= 97 && charCode <= 122)
         outputCode = resultingCode > 122 ? resultingCode - 26 : resultingCode;
-    console.log(`received character ${char}, returned ${String.fromCharCode(outputCode)}`);
     return String.fromCharCode(outputCode);
 
 }
@@ -64,6 +63,8 @@ function analyzeArray(array){
     if (array.some((ele) => !Number.isFinite(ele)))
         throw new Error("Array contains one or more non-numerical values.");
     const len = array.length;
+    if(len === 0)
+        throw new Error("An empty array has been supplied.");
     const average = array.reduce((accumulator,currentValue) => accumulator + (currentValue/len) , 0);
     const sortedArray = array.sort((a,b) => b-a);
     return { average    : average

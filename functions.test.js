@@ -22,7 +22,7 @@ describe('reverseString', () => {
         expect(result).toBe("swobniar");
     });
 
-    test('returns empty string if the same is supplied',() => {
+    test('returns empty string if the an empty string is supplied',() => {
         const result = reverseString("");
         expect(result).toBe("");
     });
@@ -111,6 +111,9 @@ describe("analyzeArray" , () => {
     });
     test("throws error when non numerical is passed", () => {
         expect(() => analyzeArray([8,4,10,"rumi"])).toThrow();
+    });
+    test("throws error when an empty array is passed", () => {
+        expect(() => analyzeArray([])).toThrow();
     });
 })
 
