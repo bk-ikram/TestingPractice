@@ -1,4 +1,4 @@
-import {capitalize, reverseString, Calculator, caesarCipher} from "./functions.js";
+import {capitalize, reverseString, Calculator, caesarCipher, analyzeArray} from "./functions.js";
 
 describe('capitalize',() => {
     test('returns first letter capitalized',() => {
@@ -71,9 +71,48 @@ describe("caeser cipher" , () => {
     test("returns correct cipher of string with only lower case alphabetical characters", () => {
         result = caesarCipher("symposium",4);
         expect(result).toBe("wcqtswmyq");
-    })
+    });
+
+    test("returns correct cipher of string with mix of upper, lower case and symbols", () => {
+        result = caesarCipher("Let the show begin!!",4);
+        expect(result).toBe("Pix xli wlsa fikmr!!");
+    });
+    test("returns correct cipher of string with mix of upper, lower case and symbols, different key", () => {
+        result = caesarCipher("Let the show begin!!",15);
+        expect(result).toBe("Ati iwt hwdl qtvxc!!");
+    });
+    test("throws an error when a number lower than 1 is passed as a key", () => {
+        expect(() => caesarCipher("my test string",0)).toThrow();
+    });
+    test("throws an error when a number higher than 26 is passed as a key", () => {
+        expect(() => caesarCipher("my test string",900)).toThrow();
+    });
+    test("throws an error when a floating number is passed as a key", () => {
+        expect(() => caesarCipher("my test string",2.5)).toThrow();
+    });
+    test("throws an error when undefined is passed as a key", () => {
+        expect(() => caesarCipher("my test string",undefined)).toThrow();
+    });
+    test("throws an error when a string is passed as a key", () => {
+        expect(() => caesarCipher("my test string","7")).toThrow();
+    });
 })
 
+describe("analyzeArray" , () => {
+    test("happy path. All integers passed", () => {
+        const result = analyzeArray([1,8,3,4,2,6]);
+        const expected = {
+                            average: 4,
+                            min: 1,
+                            max: 8,
+                            length: 6
+                            };
+        expect(result).toEqual(expected);
+    });
+    test("throws error when non numerical is passed", () => {
+        expect(() => analyzeArray([8,4,10,"rumi"])).toThrow();
+    });
+})
 
 
 

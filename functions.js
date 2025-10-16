@@ -59,4 +59,19 @@ function caesarCipher(string,key){
         return string.split("").reduce((accumulator, letter) => accumulator.concat(cipherCharacter(letter,key)) , "" );;
 }
 
-export {capitalize,reverseString, Calculator, caesarCipher};
+function analyzeArray(array){
+    //check if all elements in the array are numbers
+    if (array.some((ele) => !Number.isFinite(ele)))
+        throw new Error("Array contains one or more non-numerical values.");
+    const len = array.length;
+    const average = array.reduce((accumulator,currentValue) => accumulator + (currentValue/len) , 0);
+    const sortedArray = array.sort((a,b) => b-a);
+    return { average    : average
+            ,min        : sortedArray.at(-1)
+            ,max        : sortedArray[0]
+            ,length     : len
+    };
+}
+
+
+export {capitalize,reverseString, Calculator, caesarCipher, analyzeArray};
